@@ -1,0 +1,22 @@
+1.下载
+    https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe
+2.安装
+    1.开启Hyper-V（虚拟机）
+        pushd "%~dp0"
+        dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hyper-v.txt
+        for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
+        del hyper-v.txt
+        Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL
+    2.开启containers（容器）
+        pushd "%~dp0"
+        dir /b %SystemRoot%\servicing\Packages\*containers*.mum >containers.txt
+        for /f %%i in ('findstr /i . containers.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
+        del containers.txt
+        Dism /online /enable-feature /featurename:Containers -All /LimitAccess /ALL
+        pause
+
+    以上两个复制成.bat格式的运行
+    3.修改非专业版注册表
+        打开注册表（cmd--->regedit）,定位HKEY_LOCAL_MACHINE\software\Microsoft\Windows NT\CurrentVersion，右侧找到EditionId，修改《数值数据》为Professional。
+    4.安装
+    

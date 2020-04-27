@@ -1,0 +1,29 @@
+    1.安装
+        docker pull mysql:5.7.22
+    2.创建
+        docker run -p 3306:3306 --name liuzheng -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=thc_thc_queue -d mysql
+        -p 设置端口号
+        --name 设置容器名称
+        -e 设置环境变量
+            MYSQL_ROOT_PASSWORD 配置密码
+            MYSQL_DATABASE 配置数据库名称
+        -d 后台运行容器，并返回容器ID
+        mysql 创建mysql容器
+    3.设置
+        a.进入mysql容器
+            docker exec -it mysqldock bash
+        b.进入容器后，就是mysql的语言了,登录mysql
+            mysql -uroot -proot
+        c.查看数据库
+            show databases;
+    4.navicat登录
+        ip 为本机ip
+        端口号 -p设置的3306
+        用户名 root
+        密码 如果使用root无法登陆，需要授权
+            grant all PRIVILEGES on *.* to root@'%' WITH GRANT OPTION;
+            // 一下两句为修改密码
+            ALTER user 'root'@'%' IDENTIFIED BY '123456' PASSWORD EXPIRE NEVER;
+            ALTER user 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+
+            
